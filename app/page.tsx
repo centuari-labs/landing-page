@@ -12,7 +12,7 @@ export default function Home() {
         </Badge>
         <div>
           <h1 className="relative z-10 text-3xl md:text-7xl  bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-400  text-center font-sans font-bold">
-            Centuari Labs
+            Centuari
           </h1>
         </div>
         <p></p>
