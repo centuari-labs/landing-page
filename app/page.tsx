@@ -2,6 +2,7 @@ import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import WaitlistForm from "@/components/waitlist-form";
 
 export default function Home() {
   return (
@@ -19,12 +20,7 @@ export default function Home() {
         <p className="text-neutral-200 max-w-lg mx-auto my-2 text-sm text-center relative z-10">
           A DeFi platform revolutionizing CLOB for borrowers and lenders.
         </p>
-        <div className="flex flex-col items-center w-full gap-3 mt-8 md:flex-row">
-          <Input placeholder="Join waitlist" />
-          <Button variant="colorful" className="cursor-pointer">
-            Join Waitlist
-          </Button>
-        </div>
+        <WaitlistForm />
       </div>
       <BackgroundBeams />
     </div>
