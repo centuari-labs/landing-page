@@ -1,7 +1,5 @@
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import WaitlistForm from "@/components/waitlist-form";
 
 export default function Home() {

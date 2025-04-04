@@ -1,60 +1,50 @@
 "use client";
 
-import { useState, FormEvent } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
+import { useState, FormEvent, useCallback } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { useReCaptcha } from "next-recaptcha-v3";
 
 export default function WaitlistForm() {
   const [email, setEmail] = useState<string>("");
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const [status, setStatus] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleRecaptchaChange = (token: string | null) => {
-    setRecaptchaToken(token);
-  };
+  const { executeRecaptcha } = useReCaptcha();
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    if (!recaptchaToken) {
-      setStatus("Please complete the reCAPTCHA verification!");
-      return;
-    }
+      // Generate ReCaptcha token
+      const token = await executeRecaptcha("form_submit");
 
-    setLoading(true);
+      setLoading(true);
 
-    try {
-      const response = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, recaptchaToken }),
-      });
+      try {
+        const response = await fetch("/api/waitlist", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, recaptchaToken: token }),
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (response.ok) {
-        setStatus("Success! Your email has been added to the waitlist.");
-        setEmail("");
-        setRecaptchaToken(null);
-        // Reset reCAPTCHA
-        const recaptchaElement = document.querySelector(
-          'iframe[src*="recaptcha"]'
-        )?.parentElement;
-        if (recaptchaElement && window.grecaptcha) {
-          window.grecaptcha.reset();
+        if (response.ok) {
+          setStatus("Success! Your email has been added to the waitlist.");
+          setEmail("");
+        } else {
+          setStatus(data.error || "An error occurred. Please try again.");
         }
-      } else {
-        setStatus(data.error || "An error occurred. Please try again.");
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        setStatus("An error occurred. Please try again.");
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      setStatus("An error occurred. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    },
+    [executeRecaptcha, email]
+  );
 
   return (
     <>
@@ -76,13 +66,6 @@ export default function WaitlistForm() {
           >
             {loading ? "Loading..." : "Join Waitlist"}
           </Button>
-        </div>
-
-        <div className="mt-4">
-          <ReCAPTCHA
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-            onChange={handleRecaptchaChange}
-          />
         </div>
       </form>
 
