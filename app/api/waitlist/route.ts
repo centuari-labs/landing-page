@@ -5,6 +5,8 @@ export async function POST(request: NextRequest) {
   try {
     const { email, recaptchaToken } = await request.json();
 
+    console.log("email", email);
+
     if (!email || !recaptchaToken) {
       return NextResponse.json(
         { error: "Email and reCAPTCHA verification are required" },

@@ -4,10 +4,12 @@ import { useState, FormEvent, useCallback } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useReCaptcha } from "next-recaptcha-v3";
+import { toast } from "sonner";
+import { cn } from "@/libs/utils";
 
 export default function WaitlistForm() {
   const [email, setEmail] = useState<string>("");
-  const [status, setStatus] = useState<string>("");
+  const [isError, setIsError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   const { executeRecaptcha } = useReCaptcha();
@@ -31,14 +33,15 @@ export default function WaitlistForm() {
         const data = await response.json();
 
         if (response.ok) {
-          setStatus("Success! Your email has been added to the waitlist.");
+          toast.success("Success! Your email has been added to the waitlist.");
+          setIsError(false);
           setEmail("");
         } else {
-          setStatus(data.error || "An error occurred. Please try again.");
+          toast.error(data.error || "An error occurred. Please try again.");
+          setIsError(true);
         }
       } catch (error) {
-        console.error("Error submitting form:", error);
-        setStatus("An error occurred. Please try again.");
+        toast.error("An error occurred. Please try again.");
       } finally {
         setLoading(false);
       }
@@ -49,14 +52,15 @@ export default function WaitlistForm() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col items-center w-full gap-3 mt-8 md:flex-row">
+        <div className="flex flex-col items-center w-full md:w-[500px] gap-3 mt-4 md:mt-8 md:flex-row">
           <Input
             type="email"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            placeholder="Join waitlist"
+            placeholder="jhon@centuari.com"
+            className={cn(isError ? "border-red-500 focus:ring-red-600" : "")}
           />
           <Button
             type="submit"
@@ -68,18 +72,6 @@ export default function WaitlistForm() {
           </Button>
         </div>
       </form>
-
-      {status && (
-        <div
-          className={`mt-4 p-3 rounded-md ${
-            status.includes("Success")
-              ? "bg-green-100 text-green-800"
-              : "bg-red-100 text-red-800"
-          }`}
-        >
-          {status}
-        </div>
-      )}
     </>
   );
 }
