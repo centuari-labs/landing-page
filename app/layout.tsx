@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ReCaptchaProvider } from "next-recaptcha-v3";
 import { Toaster } from "sonner";
+import Navbar from "@/components/navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased relative overflow-hidden`}
       >
+        <Navbar />
         <ReCaptchaProvider>{children}</ReCaptchaProvider>
         <Toaster position="top-center" richColors />
       </body>

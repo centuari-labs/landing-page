@@ -52,7 +52,7 @@ export default function WaitlistForm() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col items-center w-full md:w-[500px] gap-3 mt-4 md:mt-8 md:flex-row">
+        <div className="flex flex-col items-center relative w-full md:w-[500px] gap-3 mt-4 md:mt-8 md:flex-row">
           <Input
             type="email"
             id="email"
@@ -60,15 +60,18 @@ export default function WaitlistForm() {
             onChange={(e) => setEmail(e.target.value)}
             required
             placeholder="jhon@centuari.com"
-            className={cn(isError ? "border-red-500 focus:ring-red-600" : "")}
+            className={cn(
+              "rounded-full h-14 border-[#1084AB] px-3 ring-[#0C63BA]",
+              isError ? "border-red-500 focus:ring-red-600" : ""
+            )}
           />
           <Button
             type="submit"
             variant="colorful"
-            className="cursor-pointer"
+            className="cursor-pointer rounded-full absolute right-2"
             disabled={loading || !email}
           >
-            {loading ? "Loading..." : "Join Waitlist"}
+            {loading ? "Loading..." : "Subscribe"}
           </Button>
         </div>
       </form>

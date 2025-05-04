@@ -14,7 +14,7 @@ const badgeVariants = cva(
           "border-transparent bg-red-500 text-white hover:bg-red-600",
         outline: "text-gray-900 border-gray-300",
         colorful:
-          "relative text-white overflow-hidden bg-gradient-to-r from-main-red to-main-blue dark:from-main-red dark:to-main-blue hover:shadow-md",
+          "relative text-white overflow-hidden bg-gradient-to-r from-main-red to-main-blue dark:from-[#0C63BA] dark:to-[#1084AB] hover:shadow-md",
       },
     },
     defaultVariants: {

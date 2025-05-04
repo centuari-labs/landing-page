@@ -54,7 +54,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         "bg-gradient-to-r from-pink-500 to-orange-500 text-white hover:shadow-md dark:from-pink-600 dark:to-orange-600",
       blue: "bg-gradient-to-r from-blue-500 to-indigo-500 text-white hover:shadow-md dark:from-blue-600 dark:to-indigo-600",
       colorful:
-        "relative text-white overflow-hidden bg-gradient-to-r from-main-red to-main-blue hover:shadow-md dark:from-main-red dark:to-main-blue",
+        "relative text-white overflow-hidden bg-gradient-to-r hover:bg-gradient-to-l from-main-red to-main-blue hover:shadow-md dark:from-[#1084AB] dark:to-[#0C63BA] hover:from-[#1084AB] hover:to-[#0C63BA]",
       teal: "bg-teal-500 text-white hover:bg-teal-600 dark:bg-teal-600 dark:hover:bg-teal-700",
       purple:
         "bg-purple-500 text-white hover:bg-purple-600 dark:bg-purple-600 dark:hover:bg-purple-700",
