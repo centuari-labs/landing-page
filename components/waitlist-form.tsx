@@ -50,8 +50,11 @@ export default function WaitlistForm() {
   );
 
   return (
-    <form onSubmit={handleSubmit} className="md:w-1/3 w-full">
-      <div className="flex items-center relative w-full justify-center gap-3 mt-4 md:mt-8 md:flex-row">
+    <form
+      onSubmit={handleSubmit}
+      className="md:w-1/3 w-full flex flex-col items-center justify-center"
+    >
+      <div className="flex items-center relative md:w-full w-2/3 justify-center gap-3 mt-8 md:mt-8 md:flex-row">
         <Input
           type="email"
           id="email"
