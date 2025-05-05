@@ -4,9 +4,15 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <div className="fixed top-5 left-0 w-full z-50">
+    <div className="fixed top-5 left-0 w-full z-50 px-5 md:px-0">
       <div className="container mx-auto px-8 py-2 flex bg-slate-900 border border-slate-500 justify-between items-center max-w-5xl h-16 rounded-full">
-        <Image src={"/logo.png"} width={150} height={150} alt="centuari logo" />
+        <Image
+          src={"/logo.png"}
+          width={150}
+          height={150}
+          alt="centuari logo"
+          className="overflow-hidden"
+        />
         <nav className="flex items-center gap-4 text-sm text-muted-foreground">
           <Link
             href="https://x.com/CentuariLabs"

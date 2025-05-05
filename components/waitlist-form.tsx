@@ -50,31 +50,29 @@ export default function WaitlistForm() {
   );
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <div className="flex flex-col items-center relative w-full md:w-[500px] gap-3 mt-4 md:mt-8 md:flex-row">
-          <Input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder="jhon@centuari.com"
-            className={cn(
-              "rounded-full h-14 border-[#1084AB] px-3 ring-[#0C63BA]",
-              isError ? "border-red-500 focus:ring-red-600" : ""
-            )}
-          />
-          <Button
-            type="submit"
-            variant="colorful"
-            className="cursor-pointer rounded-full absolute right-2"
-            disabled={loading || !email}
-          >
-            {loading ? "Loading..." : "Subscribe"}
-          </Button>
-        </div>
-      </form>
-    </>
+    <form onSubmit={handleSubmit} className="md:w-1/3 w-full">
+      <div className="flex items-center relative w-full justify-center gap-3 mt-4 md:mt-8 md:flex-row">
+        <Input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          placeholder="jhon@centuari.com"
+          className={cn(
+            "rounded-full md:h-14 h-12 border-[#1084AB] text-xs md:text-sm px-3 ring-[#0C63BA] placeholder:text-xs md:placeholder:text-sm",
+            isError ? "border-red-500 focus:ring-red-600" : ""
+          )}
+        />
+        <Button
+          type="submit"
+          variant={isError ? "destructive" : "colorful"}
+          className="cursor-pointer rounded-full absolute right-2 text-xs md:text-sm my-2"
+          disabled={loading || !email}
+        >
+          {loading ? "Loading..." : "Subscribe"}
+        </Button>
+      </div>
+    </form>
   );
 }
