@@ -10,7 +10,7 @@ export default function Home() {
       <div className="p-4 flex flex-col w-full items-center justify-center h-full relative z-10">
         <Badge
           variant={"colorful"}
-          className="h-10 px-5 text-sm md:text-sm font-medium"
+          className="h-8 px-5 text-sm md:text-sm font-medium"
         >
           Join Genesis Waitlist
         </Badge>
