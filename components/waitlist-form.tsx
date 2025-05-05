@@ -65,12 +65,15 @@ export default function WaitlistForm() {
             type="email"
             id="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setIsError(false);
+            }}
             required
             placeholder="jhon@centuari.com"
             className={cn(
               "rounded-full md:h-14 h-12 border-[#1084AB] text-xs md:text-sm px-3 ring-[#0C63BA] placeholder:text-xs md:placeholder:text-sm",
-              isError ? "border-red-500 focus:ring-red-600" : ""
+              isError ? "border-red-500 focus:ring-red-500" : ""
             )}
           />
           <Button
