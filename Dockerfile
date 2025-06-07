@@ -12,7 +12,7 @@ RUN npm ci
 COPY . .
 
 # Build the Next.js app
-RUN npm build
+RUN npm run build
 
 # Step 2: Run the app using a smaller image
 FROM node:18-alpine AS runner
